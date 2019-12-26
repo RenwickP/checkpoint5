@@ -19,8 +19,6 @@ class BugService {
   }
 
   async edit(id, edit) {
-    console.log(edit);
-    console.log("what", edit);
     if (edit.closed == false) {
       let data = await _repository.findOneAndUpdate({ _id: id }, edit, {
         new: true
@@ -29,10 +27,12 @@ class BugService {
       return data;
     }
   }
-  async delete(id) {
+  async delete(
+    id // this takes care of 5 not 6. Why?
+  ) {
     let data = await _repository.findOneAndUpdate(
       { _id: id },
-      { status: true }
+      { closed: true }
     );
   }
   //come back to this one//

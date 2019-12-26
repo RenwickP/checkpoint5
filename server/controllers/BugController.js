@@ -50,14 +50,6 @@ export default class BugController {
       next(error);
     }
   }
-  // async delete(req, res, next) {
-  //   try {
-  //     await bugService.edit(req.params.id, req.params.status);
-  //     return res.send("Deleted Not Deleted");
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
 
   async delete(req, res, next) {
     try {
