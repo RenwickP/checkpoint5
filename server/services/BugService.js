@@ -4,6 +4,7 @@ import Bug from "../models/Bug.js";
 const _repository = mongoose.model("Bug", Bug);
 
 class BugService {
+  //
   async getAll() {
     return await _repository.find({});
   }
@@ -20,14 +21,18 @@ class BugService {
     return await _repository.create(data);
   }
 
-  async edit(id, data) {
-    let edit = await _repository.findOneAndUpdate({ _id: id }, data, {
-      new: true
-    });
-    // if (!data) {
-    //   throw new ApiError("Bad Request");
-    // }
-    return data;
+  async edit(id, edit) {
+    console.log(edit);
+    console.log("what", edit);
+    if (edit.closed == false) {
+      let data = await _repository.findOneAndUpdate({ _id: id }, edit, {
+        new: true
+      });
+      // if (!data) {
+      //   throw new ApiError("Bad Request");
+      // }
+      return data;
+    }
   }
 
   //come back to this one//

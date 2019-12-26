@@ -1,11 +1,13 @@
 import express from "express";
 import bugService from "../services/BugService";
+import noteService from "../services/NoteService";
 
 export default class BugController {
   constructor() {
     this.router = express
       .Router()
       //
+      .get("/:id/notes", this.getNotesByBug)
       .get("", this.getAll)
       .get("/:id", this.getById)
       .post("", this.createBug)
@@ -55,5 +57,14 @@ export default class BugController {
     } catch (error) {
       next(error);
     }
+  }
+
+  //notes stuff
+
+  async getNotesByBug(req, res, next) {
+    try {
+      let data = await noteService.getNoteByBug(req.params.id);
+      return res.send(data);
+    } catch (error) {}
   }
 }

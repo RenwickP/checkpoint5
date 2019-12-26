@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const bug = new Schema(
+const Bug = new Schema(
   {
     closed: { type: Boolean, required: true, default: false },
     description: { type: String, required: true },
@@ -12,4 +12,4 @@ const bug = new Schema(
   { timestamps: true, toJSON: { virtuals: true } }
 );
 
-export default bug;
+export default Bug;
