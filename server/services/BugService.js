@@ -11,9 +11,6 @@ class BugService {
   async getById(id) {
     let data = await _repository.findById(id);
 
-    // {
-    //   throw new ApiError("Bad Id");
-    // }
     return data;
   }
 
@@ -28,13 +25,16 @@ class BugService {
       let data = await _repository.findOneAndUpdate({ _id: id }, edit, {
         new: true
       });
-      // if (!data) {
-      //   throw new ApiError("Bad Request");
-      // }
+
       return data;
     }
   }
-
+  async delete(id) {
+    let data = await _repository.findOneAndUpdate(
+      { _id: id },
+      { status: true }
+    );
+  }
   //come back to this one//
 }
 
