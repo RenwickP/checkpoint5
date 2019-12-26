@@ -7,27 +7,23 @@ export default class NoteController {
     this.router = express
       .Router()
       //
-
-      .get("/:id", this.getById)
+      .delete("/:id", this.delete)
       .post("", this.createNote);
-    // .put("/:id", this.editBug)
-    // .delete("/:id", this.delete);
-  }
-
-  async getById(req, res, next) {
-    try {
-      let data = await noteService.getById(req.params.id);
-      return res.send(data);
-    } catch (error) {
-      next(error);
-    }
   }
 
   async createNote(req, res, next) {
     try {
       let data = await noteService.createNote(req.body);
+      return res.status(200).send(data);
     } catch (error) {
       next(error);
     }
+  }
+
+  async delete(req, res, next) {
+    try {
+      let data = noteService.deleteNote(req.params.id);
+      return res.send("deleted");
+    } catch (error) {}
   }
 }

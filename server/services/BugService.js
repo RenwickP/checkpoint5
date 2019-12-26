@@ -36,12 +36,6 @@ class BugService {
   }
 
   //come back to this one//
-  async delete(id) {
-    let data = await _repository.findOneAndRemove({ _id: id });
-    // if (!data) {
-    //   throw new ApiError("Failed to Delete");
-    // }
-  }
 }
 
 const bugService = new BugService();

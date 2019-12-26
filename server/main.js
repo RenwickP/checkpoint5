@@ -3,7 +3,6 @@ import express from "express";
 import cors from "cors";
 import bp from "body-parser";
 import DbContext from "./db/dbConfig";
-// import ValuesController from "./controllers/BugController";
 
 const port = process.env.PORT || 3000;
 

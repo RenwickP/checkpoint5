@@ -11,8 +11,8 @@ export default class BugController {
       .get("", this.getAll)
       .get("/:id", this.getById)
       .post("", this.createBug)
-      .put("/:id", this.editBug)
-      .delete("/:id", this.delete);
+      .put("/:id", this.editBug);
+    // .delete("/:id", this.delete);
   }
 
   async getAll(req, res, next) {
@@ -50,14 +50,14 @@ export default class BugController {
       next(error);
     }
   }
-  async delete(req, res, next) {
-    try {
-      await bugService.delete(req.params.id);
-      return res.send("Deleted Not Deleted");
-    } catch (error) {
-      next(error);
-    }
-  }
+  // async delete(req, res, next) {
+  //   try {
+  //     await bugService.edit(req.params.id, req.params.status);
+  //     return res.send("Deleted Not Deleted");
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
 
   //notes stuff
 

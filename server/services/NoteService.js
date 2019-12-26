@@ -4,14 +4,13 @@ import Note from "../models/Note.js";
 const _repository = mongoose.model("Note", Note);
 
 class NoteService {
-  async getById(id) {
-    let data = await _repository.findById(id);
-
-    return data;
+  async createNote(data) {
+    let news = await _repository.create(data);
+    return news;
   }
 
-  async createNote(data) {
-    return await _repository.create(data);
+  async deleteNote(id) {
+    let data = await _repository.findByIdAndRemove({ _id: id });
   }
 
   //from bugs
@@ -20,6 +19,5 @@ class NoteService {
     return await _repository.find({ _id: id });
   }
 }
-
 const noteService = new NoteService();
 export default noteService;
