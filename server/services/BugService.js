@@ -27,9 +27,7 @@ class BugService {
       return data;
     }
   }
-  async delete(
-    id // this takes care of 5 not 6. Why?
-  ) {
+  async delete(id) {
     let data = await _repository.findOneAndUpdate(
       { _id: id },
       { closed: true }

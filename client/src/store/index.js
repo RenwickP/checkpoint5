@@ -1,15 +1,31 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
 
-Vue.use(Vuex)
+let serverLand = axios.create({
+  baseURL: "//localhost:3000/api",
+  timeout: 1000
+});
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    bug: [],
+    note: [],
+    activeBug: {},
+    activeNote: {}
   },
   mutations: {
+    makeBug(state, bug) {
+      state.bug.push(bug);
+    }
   },
   actions: {
+    async makeBug({ commit, dispatch }, bug) {
+      let res = await serverLand.post("bugs", bug);
+      commit("makeBug", res.data);
+    }
   },
-  modules: {
-  }
-})
+  modules: {}
+});
