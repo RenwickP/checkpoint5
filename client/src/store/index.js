@@ -19,12 +19,21 @@ export default new Vuex.Store({
   mutations: {
     makeBug(state, bug) {
       state.bug.push(bug);
+    },
+
+    mutateGetBugs(state, data) {
+      state.bug = data;
     }
   },
   actions: {
     async makeBug({ commit, dispatch }, bug) {
       let res = await serverLand.post("bugs", bug);
       commit("makeBug", res.data);
+    },
+
+    async getBugs({ commit, dispatch }) {
+      let res = await serverLand.get("bugs");
+      commit("mutateGetBugs", res.data);
     }
   },
   modules: {}

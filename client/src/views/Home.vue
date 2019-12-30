@@ -13,6 +13,7 @@
           <button>Press</button>
         </form>
         <div v-for="bug in bugs" :key="bug._id"></div>
+        <p>{{bugs}}</p>
       </div>
     </div>
   </div>
@@ -53,6 +54,9 @@ export default {
         reportedBy: ""
       };
     }
+  },
+  mounted() {
+    this.$store.dispatch("getBugs");
   }
 };
 </script>
