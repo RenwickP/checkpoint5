@@ -1,10 +1,10 @@
 <template>
-  <div class="container home">
+  <div class="container-fluid home">
     <div class="row">
       <!-- <div class="col-6 bug">
         <h3>Bug Report</h3>
       </div>-->
-      <div class="col-6 report">
+      <div class="col report text-center">
         <p>Report Bug</p>
         <form @submit.prevent="makeBug">
           <input type="text" v-model="newBug.title" placeholder="name" />
@@ -12,16 +12,58 @@
           <input type="text" v-model="newBug.reportedBy" placeholder="User Name" />
           <button>Press</button>
         </form>
-        <div class="row">
+        <div class>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Posted By</th>
+                <th scope="col">Closed</th>
+                <th scope="col">Modified</th>
+              </tr>
+            </thead>
+          </table>
           <div v-for="bug in bugs" :key="bug._id">
-            <div class="col-4 name">{{bug.title}}</div>
-            <div class="col-4 problem">{{bug.desctiption}}</div>
-            <div class="col-4 type">{{bug.reportedBy}}</div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <div class="row justify-content-around">
+                    <th scope="col">{{bug.title}}</th>
+                    <th scope="col">{{bug.reportedBy}}</th>
+                    <th scope="col">{{bug.closed}}</th>
+                    <th scope="col">{{bug.updatedAt}}</th>
+                  </div>
+                </tr>
+              </thead>
+
+              <!-- <thead>
+                <tr>
+                  <td>{{bug.title}}</td>
+                  <td>{{bug.reportedBy}}</td>
+                  <td>{{bug.closed}}</td>
+                  <td>{{bug.updatedAt}}</td>
+                </tr>
+              </thead>-->
+            </table>
+
+            <!-- <ul>
+              <li>{{bug.title}}</li>
+              <li>{{bug.reportedBy}}</li>
+              <li>{{bug.closed}}</li>
+              <li>{{bug.updatedAt}}</li>
+            </ul>-->
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- <ul>
+              <li>{{bug.title}}</li>
+              <li>{{bug.reportedBy}}</li>
+              <li>{{bug.closed}}</li>
+              <li>{{bug.updatedAt}}</li>
+  </ul>-->
 </template>
 
 <script>
@@ -80,3 +122,5 @@ export default {
   text-align: start;
 }
 </style>
+
+
