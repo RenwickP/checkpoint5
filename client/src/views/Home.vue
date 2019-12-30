@@ -12,8 +12,13 @@
           <input type="text" v-model="newBug.reportedBy" placeholder="User Name" />
           <button>Press</button>
         </form>
-        <div v-for="bug in bugs" :key="bug._id"></div>
-        <p>{{bugs}}</p>
+        <div class="row">
+          <div v-for="bug in bugs" :key="bug._id">
+            <div class="col-4 name">{{bug.title}}</div>
+            <div class="col-4 problem">{{bug.desctiption}}</div>
+            <div class="col-4 type">{{bug.reportedBy}}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -69,5 +74,9 @@ export default {
 .report {
   text-align: end;
   background-color: aqua;
+}
+
+.name {
+  text-align: start;
 }
 </style>
