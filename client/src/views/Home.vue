@@ -28,10 +28,12 @@
               <thead>
                 <tr>
                   <div class="row justify-content-around">
-                    <th scope="col">{{bug.title}}</th>
-                    <th scope="col">{{bug.reportedBy}}</th>
-                    <th scope="col">{{bug.closed}}</th>
-                    <th scope="col">{{bug.updatedAt}}</th>
+                    <router-link :to="{name: 'bugs', params: {id: bug.id} }">
+                      <th>{{bug.title}}</th>
+                      <th>{{bug.reportedBy}}</th>
+                      <th>{{bug.closed}}</th>
+                      <th>{{bug.updatedAt}}</th>
+                    </router-link>
                   </div>
                 </tr>
               </thead>
