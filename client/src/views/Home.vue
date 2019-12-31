@@ -1,9 +1,6 @@
 <template>
   <div class="container-fluid home">
     <div class="row">
-      <!-- <div class="col-6 bug">
-        <h3>Bug Report</h3>
-      </div>-->
       <div class="col report text-center">
         <p>Report Bug</p>
         <form @submit.prevent="makeBug">
@@ -23,12 +20,12 @@
               </tr>
             </thead>
           </table>
-          <div v-for="bug in bugs" :key="bug._id">
+          <div v-for="bug in bugs" :key="bug.id">
             <table class="table">
               <thead>
                 <tr>
-                  <div class="row justify-content-around">
-                    <router-link :to="{name: 'bugs', params: {id: bug.id} }">
+                  <div class="row">
+                    <router-link :to="{name: 'bugs' , params: {id: bug.id} }">
                       <th>{{bug.title}}</th>
                       <th>{{bug.reportedBy}}</th>
                       <th>{{bug.closed}}</th>
@@ -37,35 +34,12 @@
                   </div>
                 </tr>
               </thead>
-
-              <!-- <thead>
-                <tr>
-                  <td>{{bug.title}}</td>
-                  <td>{{bug.reportedBy}}</td>
-                  <td>{{bug.closed}}</td>
-                  <td>{{bug.updatedAt}}</td>
-                </tr>
-              </thead>-->
             </table>
-
-            <!-- <ul>
-              <li>{{bug.title}}</li>
-              <li>{{bug.reportedBy}}</li>
-              <li>{{bug.closed}}</li>
-              <li>{{bug.updatedAt}}</li>
-            </ul>-->
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- <ul>
-              <li>{{bug.title}}</li>
-              <li>{{bug.reportedBy}}</li>
-              <li>{{bug.closed}}</li>
-              <li>{{bug.updatedAt}}</li>
-  </ul>-->
 </template>
 
 <script>

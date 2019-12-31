@@ -23,6 +23,10 @@ export default new Vuex.Store({
 
     mutateGetBugs(state, data) {
       state.bug = data;
+    },
+
+    makeActiveBug(state, bug) {
+      state.activeBug = bug;
     }
   },
   actions: {
@@ -34,6 +38,15 @@ export default new Vuex.Store({
     async getBugs({ commit, dispatch }) {
       let res = await serverLand.get("bugs");
       commit("mutateGetBugs", res.data);
+    },
+    async getById({ commit, dispatch }, id) {
+      let res = await serverLand.get("bugs/" + id);
+      commit("makeActiveBug", res.data);
+    },
+
+    async delete({ commit, dispatch }, id) {
+      await serverLand.delete("bugs/" + id);
+      dispatch("makeBug");
     }
   },
   modules: {}

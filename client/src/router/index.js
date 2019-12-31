@@ -13,7 +13,7 @@ const routes = [
   },
 
   {
-    path: "/bugs",
+    path: "/bugs/:id",
     name: "bugs",
     component: Bug
   },
