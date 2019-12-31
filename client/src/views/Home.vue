@@ -3,12 +3,14 @@
     <div class="row">
       <div class="col report text-center">
         <p>Report Bug</p>
+
         <form @submit.prevent="makeBug">
           <input type="text" v-model="newBug.title" placeholder="name" />
           <input type="text" v-model="newBug.description" placeholder="comment" />
           <input type="text" v-model="newBug.reportedBy" placeholder="User Name" />
           <button>Press</button>
         </form>
+
         <div class>
           <table class="table">
             <thead>
