@@ -9,6 +9,7 @@
       class="row"
       :class="{ color: bug.closed == true, open: bug.closed == false }"
     >{{bug.closed}}</div>
+    <button @click="close">Close Bug</button>
   </div>
 </template>
 
@@ -22,13 +23,23 @@ export default {
     }
   },
 
+  methods: {
+    close() {
+      let close = window.confirm("Did you resolve this bug???");
+
+      if (close == true) {
+        this.$store.dispatch("delete", this.bug.id);
+      }
+    }
+  },
+
   mounted() {
     this.$store.dispatch("getById", this.$route.params.id);
   }
 };
 </script>
 
-<style>
+<style scoped>
 .color {
   color: green;
 }

@@ -45,8 +45,9 @@ export default new Vuex.Store({
     },
 
     async delete({ commit, dispatch }, id) {
-      await serverLand.delete("bugs/" + id);
+      let res = await serverLand.delete("bugs/" + id);
       dispatch("makeBug");
+      commit("makeActiveBug", res.data);
     }
   },
   modules: {}

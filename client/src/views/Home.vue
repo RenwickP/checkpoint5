@@ -30,7 +30,9 @@
                     <router-link :to="{name: 'bugs' , params: {id: bug.id} }">
                       <th>{{bug.title}}</th>
                       <th>{{bug.reportedBy}}</th>
-                      <th>{{bug.closed}}</th>
+                      <th
+                        :class="{ color: bug.closed == true, open: bug.closed == false }"
+                      >{{bug.closed}}</th>
                       <th>{{bug.updatedAt}}</th>
                     </router-link>
                   </div>
@@ -90,6 +92,14 @@ export default {
 /* .bug {
   text-align-last: start;
 } */
+
+.color {
+  color: green;
+}
+
+.open {
+  color: red;
+}
 
 .report {
   text-align: end;
