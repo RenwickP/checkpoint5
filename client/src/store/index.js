@@ -27,9 +27,29 @@ export default new Vuex.Store({
 
     makeActiveBug(state, bug) {
       state.activeBug = bug;
+    },
+    /////////////notes///////////
+
+    makeNote(state, note) {
+      state.note.push(note);
+    },
+
+    makeActiveNote(state, note) {
+      state.activeNote = note;
     }
   },
   actions: {
+    async makeNote({ commit, dispatch }, note) {
+      let res = await serverLand.post("notes", note);
+      commit("makeNote", res.data);
+    },
+
+    async getNotesById({ commit, dispatch }, id) {
+      let res = await serverLand.get("bugs/" + id + "/notes");
+      commit("makeActiveNote", res.data);
+    },
+
+    ////////bugs////////
     async makeBug({ commit, dispatch }, bug) {
       let res = await serverLand.post("bugs", bug);
       commit("makeBug", res.data);
@@ -46,8 +66,8 @@ export default new Vuex.Store({
 
     async delete({ commit, dispatch }, id) {
       let res = await serverLand.delete("bugs/" + id);
-      dispatch("makeBug");
-      commit("makeActiveBug", res.data);
+      dispatch("getById", id);
+      // commit("makeActiveBugs", res.data);
     }
   },
   modules: {}

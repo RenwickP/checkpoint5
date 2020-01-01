@@ -10,6 +10,19 @@
       :class="{ color: bug.closed == true, open: bug.closed == false }"
     >{{bug.closed}}</div>
     <button @click="close">Close Bug</button>
+    <div class="row">
+      <div class="col text-center note-color">
+        <h1>Notes</h1>
+        <div class="col note-box">{{note}}</div>
+        <div class="col text-right button-box">
+          <form @submit.prevent="makeNote">
+            <input type="text" v-model="newNote.content" placeholder="notes" />
+            <input type="text" v-model="newNote.reportedBy" placeholder="User Name" />
+            <button>Add Note</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,16 +30,39 @@
 export default {
   name: "bugs",
 
+  data() {
+    return {
+      newNote: {
+        content: "",
+        bug: {},
+        reportedBy: ""
+      }
+    };
+  },
+
   computed: {
     bug() {
       return this.$store.state.activeBug;
+    },
+
+    note() {
+      return this.$store.state.activeNote;
     }
   },
 
   methods: {
+    makeNote() {
+      let note = { ...this.newNote };
+      this.$store.dispatch("makeNote", note);
+      this.newNote = {
+        content: "",
+        bug: {},
+        reportedBy: ""
+      };
+    },
+
     close() {
       let close = window.confirm("Did you resolve this bug???");
-
       if (close == true) {
         this.$store.dispatch("delete", this.bug.id);
       }
@@ -35,6 +71,8 @@ export default {
 
   mounted() {
     this.$store.dispatch("getById", this.$route.params.id);
+
+    this.$store.dispatch("getNotesById", this.$route.params.id);
   }
 };
 </script>
@@ -46,5 +84,15 @@ export default {
 
 .open {
   color: red;
+}
+
+.note-color {
+  color: purple;
+}
+
+.note-box {
+  opacity: 0.4;
+  min-height: 15vh;
+  background-color: grey;
 }
 </style>

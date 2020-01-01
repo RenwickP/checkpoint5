@@ -70,6 +70,9 @@ export default {
       return this.$store.state.bug;
     }
   },
+  // openBugs() {
+  //   this.bugs.filter(b => !bug.closed);
+  // },
 
   methods: {
     makeBug() {
