@@ -13,7 +13,11 @@
     <div class="row">
       <div class="col text-center note-color">
         <h1>Notes</h1>
-        <div class="col note-box">{{note}}</div>
+
+        <div class="col note-box">
+          <p class="text-color">{{note}}</p>
+        </div>
+
         <div class="col text-right button-box">
           <form @submit.prevent="makeNote">
             <input type="text" v-model="newNote.content" placeholder="notes" />
@@ -21,8 +25,18 @@
             <button>Add Note</button>
           </form>
         </div>
+        <p>Test</p>
+        <div v-for="realNote in realNotes" :key="realNote.id">{{realNote.content}}</div>
       </div>
     </div>
+    <!-- <div class="row">
+      <form @submit.prevent="editBug">
+        <input type="text" v-model="newEdit.title" placeholder="edit name" />
+        <input type="text" v-model="newEdit.description" placeholder="edit comment" />
+        <input type="text" v-model="newEdit.reportedBy" placeholder="edit User Name" />
+        <button>Edit Bug</button>
+      </form>
+    </div>-->
   </div>
 </template>
 
@@ -37,12 +51,22 @@ export default {
         bug: {},
         reportedBy: ""
       }
+
+      // newEdit: {
+      //   title: "",
+      //   description: "",
+      //   reportedBy: ""
+      // }
     };
   },
 
   computed: {
     bug() {
       return this.$store.state.activeBug;
+    },
+
+    realNotes() {
+      return this.$store.state.note;
     },
 
     note() {
@@ -52,6 +76,7 @@ export default {
 
   methods: {
     makeNote() {
+      // debugger;
       let note = { ...this.newNote };
       this.$store.dispatch("makeNote", note);
       this.newNote = {
@@ -60,6 +85,16 @@ export default {
         reportedBy: ""
       };
     },
+
+    // editBug() {
+    //   let edit = { ...this.newEdit };
+    //   this.$store.dispatch("editBugs", edit);
+    //   this.editBug = {
+    //     title: "",
+    //     description: "",
+    //     reportedBy: ""
+    //   };
+    // },
 
     close() {
       let close = window.confirm("Did you resolve this bug???");
@@ -71,8 +106,10 @@ export default {
 
   mounted() {
     this.$store.dispatch("getById", this.$route.params.id);
-
-    this.$store.dispatch("getNotesById", this.$route.params.id);
+    console.log("hello", this.$store.state.note);
+    console.log("hello bug", this.$store.state.bug);
+    // this.$store.dispatch("getNotesById", this.$route.params.id);
+    // this.$store.dispatch("getNotesById", this.realNotes.id);
   }
 };
 </script>
@@ -90,8 +127,12 @@ export default {
   color: purple;
 }
 
+.text-color {
+  color: red;
+}
+
 .note-box {
-  opacity: 0.4;
+  opacity: 0.5;
   min-height: 15vh;
   background-color: grey;
 }

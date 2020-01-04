@@ -6,6 +6,7 @@ const _repository = mongoose.model("Note", Note);
 class NoteService {
   async createNote(data) {
     let news = await _repository.create(data);
+    // console.log("from controller", news.id);
     return news;
   }
 
@@ -16,8 +17,13 @@ class NoteService {
   //from bugs
 
   async getNoteByBug(id) {
-    return await _repository.find({ _id: id });
+    return await _repository.findById({ _id: id });
   }
 }
+
+// async getNoteByBug() {
+//   return await _repository.find({});
+// }
+// }
 const noteService = new NoteService();
 export default noteService;

@@ -8,9 +8,12 @@
           <input type="text" v-model="newBug.title" placeholder="name" />
           <input type="text" v-model="newBug.description" placeholder="comment" />
           <input type="text" v-model="newBug.reportedBy" placeholder="User Name" />
+
+          <!-- <button @click="this.$router.push ({path:'bugs', params: {id: bug.id}})">Press</button> -->
+
           <button>Press</button>
         </form>
-
+        <!-- <button @click="sort">Sort</button> -->
         <div class>
           <table class="table">
             <thead>
@@ -27,6 +30,7 @@
               <thead>
                 <tr>
                   <div class="row">
+                    <!-- <div v-if="bug.close == true">Open</div> -->
                     <router-link :to="{name: 'bugs' , params: {id: bug.id} }">
                       <th>{{bug.title}}</th>
                       <th>{{bug.reportedBy}}</th>
@@ -69,8 +73,12 @@ export default {
     bugs() {
       return this.$store.state.bug;
     }
+    // ralf() {
+    //   return this.$store.state.activeBug;
+    // }
   },
-  // openBugs() {
+
+  // sort() {
   //   this.bugs.filter(b => !bug.closed);
   // },
 
@@ -78,11 +86,13 @@ export default {
     makeBug() {
       let bug = { ...this.newBug };
       this.$store.dispatch("makeBug", bug);
+
       this.newBug = {
         title: "",
         description: "",
         reportedBy: ""
       };
+      // this.router.push({ path: "bugs", params: { id: bug.id } });
     }
   },
   mounted() {

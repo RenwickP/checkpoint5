@@ -66,4 +66,11 @@ export default class BugController {
       return res.send(data);
     } catch (error) {}
   }
+
+  // async getNotesByBug(req, res, next) {
+  //   try {
+  //     let data = await noteService.getNoteByBug();
+  //     return res.send(data);
+  //   } catch (error) {}
+  // }
 }
