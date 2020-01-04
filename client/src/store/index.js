@@ -35,7 +35,7 @@ export default new Vuex.Store({
     },
 
     makeActiveNote(state, note) {
-      state.activeBug = note;
+      state.activeNote = note;
     }
     ///////
   },
@@ -44,14 +44,15 @@ export default new Vuex.Store({
       // debugger;
       let res = await serverLand.post("notes", note);
       commit("makeNote", res.data);
-      dispatch("getNotesById", res.data.id);
+      console.log("from create", note);
+      // dispatch("getNotesById", res.data);
       ////
     },
 
     async getNotesById({ commit, dispatch }, id) {
       let res = await serverLand.get("bugs/" + id + "/notes");
-      console.log("id from mount", id);
-      console.log("from store", res);
+      // console.log("id from mount", id);
+      console.log("from store", res.data);
       commit("makeActiveNote", res.data);
     },
 
