@@ -48,7 +48,7 @@ export default {
     return {
       newNote: {
         content: "",
-        bug: {},
+        bug: this.$route.params.id,
         reportedBy: ""
       }
 
@@ -81,7 +81,7 @@ export default {
       this.$store.dispatch("makeNote", note);
       this.newNote = {
         content: "",
-        bug: {},
+        bug: this.$route.params.id,
         reportedBy: ""
       };
     },
@@ -108,7 +108,7 @@ export default {
     this.$store.dispatch("getById", this.$route.params.id);
     console.log("hello", this.$store.state.note);
     console.log("hello bug", this.$store.state.bug);
-    // this.$store.dispatch("getNotesById", this.$route.params.id);
+    this.$store.dispatch("getNotesById", this.$route.params.id);
     // this.$store.dispatch("getNotesById", this.realNotes.id);
   }
 };
