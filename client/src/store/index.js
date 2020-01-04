@@ -44,8 +44,8 @@ export default new Vuex.Store({
       // debugger;
       let res = await serverLand.post("notes", note);
       commit("makeNote", res.data);
-      console.log("from create", note);
-      // dispatch("getNotesById", res.data);
+      console.log("from create", res.data);
+      dispatch("getNotesById", res.data.bug);
       ////
     },
 

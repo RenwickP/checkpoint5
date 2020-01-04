@@ -15,7 +15,8 @@
         <h1>Notes</h1>
 
         <div class="col note-box">
-          <p class="text-color">{{note}}</p>
+          <!-- <p class="text-color"></p> -->
+          <div class="text-color" v-for="note in notes" :key="note.id">{{note.content}}</div>
         </div>
 
         <div class="col text-right button-box">
@@ -26,7 +27,7 @@
           </form>
         </div>
         <p>Test</p>
-        <div v-for="realNote in realNotes" :key="realNote.id">{{realNote.content}}</div>
+        <!-- <div v-for="realNote in realNotes" :key="realNote.id">{{realNote.content}}</div> -->
       </div>
     </div>
     <!-- <div class="row">
@@ -69,7 +70,7 @@ export default {
       return this.$store.state.note;
     },
 
-    note() {
+    notes() {
       return this.$store.state.activeNote;
     }
   },
@@ -106,8 +107,8 @@ export default {
 
   mounted() {
     this.$store.dispatch("getById", this.$route.params.id);
-    console.log("hello", this.$store.state.note);
-    console.log("hello bug", this.$store.state.bug);
+    // console.log("hello", this.$store.state.note);
+    // console.log("hello bug", this.$store.state.bug);
     this.$store.dispatch("getNotesById", this.$route.params.id);
     // this.$store.dispatch("getNotesById", this.realNotes.id);
   }
