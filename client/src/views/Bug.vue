@@ -71,7 +71,8 @@ export default {
         id: this.$route.params.id,
         title: "",
         description: "",
-        reportedBy: ""
+        reportedBy: "",
+        closed: false
       }
     };
   },
@@ -98,22 +99,26 @@ export default {
       this.newNote = {
         content: "",
         bug: this.$route.params.id,
-        reportedBy: ""
+        reportedBy: "",
+        closed: ""
       };
     },
 
     editBug() {
       let edit = { ...this.newEdit };
-      this.$store.dispatch("edit", edit);
+      this.$store.dispatch("edit", edit, this.bug.closed);
       console.log("from edit", edit);
       console.log("from edit id", this.bug.id);
+      // console.log("looking for closed thing", this.bug.closed);
       // console.log("test data");
       this.newEdit = {
         // closed: this.$store.state.activeBug.closed,
         id: this.$route.params.id,
         title: "",
         description: "",
-        reportedBy: ""
+        reportedBy: "",
+        closed: false
+        // closed: this.$store.state.activeBug.closed
       };
     },
 
