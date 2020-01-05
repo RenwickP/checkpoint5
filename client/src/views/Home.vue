@@ -72,15 +72,18 @@ export default {
   computed: {
     bugs() {
       return this.$store.state.bug;
-    }
+    },
     // ralf() {
     //   return this.$store.state.activeBug;
-    // }
-  },
+    // },
 
-  // sort() {
-  //   this.bugs.filter(b => !bug.closed);
-  // },
+    sort() {
+      console.log("do I exist?", this.bugs);
+      debugger;
+      this.bugz = this.bugs.filter(b => bug.closed);
+      console.log(this.bugz);
+    }
+  },
 
   methods: {
     makeBug() {

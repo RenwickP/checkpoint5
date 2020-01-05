@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import Note from "../models/Note.js";
+import bugService from "./BugService.js";
+import note from "../models/Note.js";
 
 const _repository = mongoose.model("Note", Note);
 

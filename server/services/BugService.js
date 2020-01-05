@@ -20,6 +20,10 @@ class BugService {
 
   async edit(id, edit) {
     //remeber to uncomment this line
+    // if (edit.closed == true) {
+    //   return window.alert(
+    //     "What are you doing? You know you cant edit closed bugs"
+    //   );
     if (edit.closed == false) {
       let data = await _repository.findOneAndUpdate({ _id: id }, edit, {
         new: true

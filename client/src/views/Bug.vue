@@ -5,16 +5,14 @@
       <div class="col-3 text-left">{{bug.title}}</div>
       <div class="col-9 text-center">{{bug.description}}</div>
     </div>
-    <div
-      class="row"
-      :class="{ color: bug.closed == true, open: bug.closed == false }"
-    >{{bug.closed}}</div>
+    <div class="row" :class="{ color: bug.closed == true, open: bug.closed == false }"></div>
     <div>Edit Land</div>
 
     <form @submit.prevent="editBug">
       <input type="text" v-model="newEdit.title" placeholder="name" />
       <input type="text" v-model="newEdit.description" placeholder="comment" />
       <input type="text" v-model="newEdit.reportedBy" placeholder="User Name" />
+      <!-- <input type="boolean" v-model="newEdit.closed" /> -->
 
       <button>Press</button>
     </form>
@@ -28,10 +26,10 @@
           <!-- <p class="text-color"></p> -->
           <div class="text-color" v-for="note in notes" :key="note.id">
             {{note.content}}
-            <button @click="closeNote">Delete Note</button>
+            <!-- <button @click="closeNote('{note.id}')">Delete Note</button> -->
+            <button @click="closeNote(note.id)">Delete</button>
           </div>
         </div>
-
         <div class="col text-right button-box">
           <form @submit.prevent="makeNote">
             <input type="text" v-model="newNote.content" placeholder="notes" />
@@ -67,12 +65,12 @@ export default {
       },
 
       newEdit: {
+        // closed: this.bug.closed,
         // closed: this.$store.state.activeBug.closed,
         id: this.$route.params.id,
         title: "",
         description: "",
-        reportedBy: "",
-        closed: false
+        reportedBy: ""
       }
     };
   },
@@ -99,25 +97,28 @@ export default {
       this.newNote = {
         content: "",
         bug: this.$route.params.id,
-        reportedBy: "",
-        closed: ""
+        reportedBy: ""
       };
     },
 
     editBug() {
       let edit = { ...this.newEdit };
-      this.$store.dispatch("edit", edit, this.bug.closed);
-      console.log("from edit", edit);
+      this.$store.dispatch("edit", edit);
+      // console.log("from edit", editBug);
       console.log("from edit id", this.bug.id);
+      console.log("show off data", this.bug.closed);
       // console.log("looking for closed thing", this.bug.closed);
-      // console.log("test data");
+      // console.log("test data", this.$store.state.activeBug.closed);
       this.newEdit = {
         // closed: this.$store.state.activeBug.closed,
+        // closed: this.bug.closed,
+
         id: this.$route.params.id,
         title: "",
         description: "",
-        reportedBy: "",
-        closed: false
+        reportedBy: ""
+        // closed: Boolean
+
         // closed: this.$store.state.activeBug.closed
       };
     },
@@ -129,11 +130,13 @@ export default {
       }
     },
 
-    closeNote() {
+    closeNote(closeNote) {
       // console.log("from close note");
       let close = window.confirm("Do you want to delete this note?");
       if (close == true) {
-        this.$store.dispatch("deleteNote", this.notes.id);
+        console.log("test fun now", bugId);
+        console.log("attemps to delete", closeNote);
+        this.$store.dispatch("deleteNote", closeNote);
       }
     }
   },

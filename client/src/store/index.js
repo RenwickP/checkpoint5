@@ -57,8 +57,13 @@ export default new Vuex.Store({
     },
 
     async deleteNote({ commit, dispatch }, id) {
-      console.log("from delete", id);
+      console.log("from delete note", id);
       let res = await serverLand.delete("notes/" + id);
+      console.log("delete note", res);
+      // dispatch("getNotesById", id);
+      // commit("makeActiveNote", res);
+
+      // dispatch("getNotesById", res.data);
     },
 
     ////////bugs////////
