@@ -60,7 +60,7 @@ export default new Vuex.Store({
       console.log("from delete note", id);
       let res = await serverLand.delete("notes/" + id);
       console.log("delete note", res);
-      // dispatch("getNotesById", id);
+
       // commit("makeActiveNote", res);
 
       // dispatch("getNotesById", res.data);

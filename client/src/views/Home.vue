@@ -79,7 +79,7 @@ export default {
 
     sort() {
       console.log("do I exist?", this.bugs);
-      debugger;
+
       this.bugz = this.bugs.filter(b => bug.closed);
       console.log(this.bugz);
     }

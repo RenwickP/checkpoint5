@@ -134,7 +134,6 @@ export default {
       // console.log("from close note");
       let close = window.confirm("Do you want to delete this note?");
       if (close == true) {
-        console.log("test fun now", bugId);
         console.log("attemps to delete", closeNote);
         this.$store.dispatch("deleteNote", closeNote);
       }
