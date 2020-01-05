@@ -19,7 +19,10 @@ class BugService {
   }
 
   async edit(id, edit) {
-    if (edit.closed == false) {
+    //remeber to uncomment this line
+    // if (edit.closed == false)
+
+    {
       let data = await _repository.findOneAndUpdate({ _id: id }, edit, {
         new: true
       });
