@@ -72,17 +72,17 @@ export default {
   computed: {
     bugs() {
       return this.$store.state.bug;
-    },
+    }
     // ralf() {
     //   return this.$store.state.activeBug;
     // },
 
-    sort() {
-      console.log("do I exist?", this.bugs);
+    // sort() {
+    //   console.log("do I exist?", this.bugs);
 
-      this.bugz = this.bugs.filter(b => bug.closed);
-      console.log(this.bugz);
-    }
+    //   this.bugz = this.bugs.filter(b => bug.closed);
+    //   console.log(this.bugz);
+    // }
   },
 
   methods: {

@@ -67,6 +67,7 @@ export default {
       newEdit: {
         // closed: this.bug.closed,
         // closed: this.$store.state.activeBug.closed,
+        closed: false,
         id: this.$route.params.id,
         title: "",
         description: "",
@@ -112,7 +113,7 @@ export default {
       this.newEdit = {
         // closed: this.$store.state.activeBug.closed,
         // closed: this.bug.closed,
-
+        closed: false,
         id: this.$route.params.id,
         title: "",
         description: "",
@@ -131,11 +132,15 @@ export default {
     },
 
     closeNote(closeNote) {
+      let noteObject = {
+        noteId: closeNote,
+        bugId: this.$route.params.id
+      };
       // console.log("from close note");
       let close = window.confirm("Do you want to delete this note?");
       if (close == true) {
-        console.log("attemps to delete", closeNote);
-        this.$store.dispatch("deleteNote", closeNote);
+        console.log("attemps to delete", noteObject);
+        this.$store.dispatch("deleteNote", noteObject);
       }
     }
   },
