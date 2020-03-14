@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import router from "../router";
 
 let serverLand = axios.create({
   baseURL: "//localhost:3000/api",
@@ -80,6 +81,7 @@ export default new Vuex.Store({
     async makeBug({ commit, dispatch }, bug) {
       let res = await serverLand.post("bugs", bug);
       commit("makeBug", res.data);
+      router.push({ path: "/bugs/" + res.data.id });
     },
 
     async getBugs({ commit, dispatch }) {

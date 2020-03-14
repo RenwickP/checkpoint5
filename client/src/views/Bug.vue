@@ -2,10 +2,13 @@
   <div class="bugs container-fluid">
     <h1>Bug Details</h1>
     <div class="row">
-      <div class="col-3 text-left">{{bug.title}}</div>
-      <div class="col-9 text-center">{{bug.description}}</div>
+      <div class="col-3 text-left">{{ bug.title }}</div>
+      <div class="col-9 text-center">{{ bug.description }}</div>
     </div>
-    <div class="row" :class="{ color: bug.closed == true, open: bug.closed == false }"></div>
+    <div
+      class="row"
+      :class="{ color: bug.closed == true, open: bug.closed == false }"
+    ></div>
     <div>Edit Land</div>
 
     <form @submit.prevent="editBug">
@@ -25,7 +28,7 @@
         <div class="col note-box">
           <!-- <p class="text-color"></p> -->
           <div class="text-color" v-for="note in notes" :key="note.id">
-            {{note.content}}
+            {{ note.content }}
             <!-- <button @click="closeNote('{note.id}')">Delete Note</button> -->
             <button @click="closeNote(note.id)">Delete</button>
           </div>
@@ -33,7 +36,11 @@
         <div class="col text-right button-box">
           <form @submit.prevent="makeNote">
             <input type="text" v-model="newNote.content" placeholder="notes" />
-            <input type="text" v-model="newNote.reportedBy" placeholder="User Name" />
+            <input
+              type="text"
+              v-model="newNote.reportedBy"
+              placeholder="User Name"
+            />
             <button>Add Note</button>
           </form>
         </div>
